@@ -11,15 +11,15 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #000000; /* Черный фон вокруг */
+            background-color: #000000; /* Чистый черный фон */
             display: flex;
             justify-content: center;
             align-items: center;
         }
         img {
-            max-width: 95%; /* Не дает картинке вылазить по ширине */
-            max-height: 95vh; /* Не дает вылазить по высоте */
-            object-fit: contain; /* Картинка сжимается и видна ПОЛНОСТЬЮ */
+            max-width: 95%; /* Идеальный размер, чтобы не обрезалась */
+            max-height: 95vh;
+            object-fit: contain;
             display: block;
             transform: scale(0);
             animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
