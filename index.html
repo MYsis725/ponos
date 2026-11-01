@@ -1,87 +1,37 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Вхід до безкоштовної Wi-Fi мережі</title>
+    <title> </title>
     <style>
-        * { box-sizing: border-box; }
         body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif; background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000000; /* Черный фон вокруг */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        #wifi-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background-color: #ffffff; z-index: 10; padding: 20px;
+        img {
+            max-width: 95%; /* Не дает картинке вылазить по ширине */
+            max-height: 95vh; /* Не дает вылазить по высоте */
+            object-fit: contain; /* Картинка сжимается и видна ПОЛНОСТЬЮ */
+            display: block;
+            transform: scale(0);
+            animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-        .wifi-icon { font-size: 64px; color: #007aff; margin-bottom: 20px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); opacity: 0.8; } }
-        h2 { font-size: 22px; color: #333; margin: 0 0 10px 0; text-align: center; }
-        p { font-size: 14px; color: #666; margin: 0 0 30px 0; text-align: center; }
-        .btn-connect {
-            background-color: #007aff; color: white; border: none; padding: 15px 40px;
-            font-size: 16px; font-weight: 600; border-radius: 25px; cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3); width: 100%; max-width: 280px;
-        }
-        #monkey-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #000000; display: flex; justify-content: center; align-items: center;
-            z-index: 5; visibility: hidden;
-        }
-        .show-monkey { visibility: visible !important; animation: flashScreen 0.4s infinite; }
-        @keyframes flashScreen { 0%, 100% { background-color: #000000; } 50% { background-color: #ff0000; } }
-        img { max-width: 95%; max-height: 95vh; object-fit: contain; display: block; transform: scale(0); }
-        .show-monkey img { animation: popAndShake 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, shake 0.1s infinite; animation-delay: 0s, 0.3s; }
-        @keyframes popAndShake { to { transform: scale(1); } }
-        @keyframes shake {
-            0% { transform: translate(2px, 1px) rotate(0deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        @keyframes popUp {
+            to { transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <div id="wifi-screen">
-        <div class="wifi-icon">📶</div>
-        <h2>Безкоштовний Wi-Fi</h2>
-        <p>Для отримання доступу до швидкісного інтернету натисніть кнопку нижче.</p>
-        <button class="btn-connect" onclick="startPrank()">ПІДКЛЮЧИТИСЯ</button>
-    </div>
-
-    <div id="monkey-screen">
-        <img src="monkey.jpg" alt="">
-    </div>
-
-    <!-- Стопроцентный неубиваемый звук с серверов Википедии -->
-    <audio id="fartAudio" crossorigin="anonymous">
-        <source src="https://wikimedia.org" type="audio/ogg">
-        <source src="https://wikimedia.org" type="audio/mpeg">
-    </audio>
-
-    <script>
-        function startPrank() {
-            var audio = document.getElementById('fartAudio');
-            
-            // Принудительный старт медиа-контекста
-            audio.currentTime = 0;
-            var playPromise = audio.play();
-
-            if (playPromise !== undefined) {
-                playPromise.catch(function(error) {
-                    console.log("Браузер заблокировал звук:", error);
-                });
-            }
-
-            document.getElementById('wifi-screen').style.display = 'none';
-            var monkeyScreen = document.getElementById('monkey-screen');
-            monkeyScreen.classList.add('show-monkey');
-        }
-    </script>
+    <img src="monkey.jpg" alt="">
 
 </body>
 </html>
