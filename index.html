@@ -31,7 +31,6 @@
             background-color: #ffffff;
             z-index: 10;
             padding: 20px;
-            transition: opacity 0.2s ease;
         }
         .wifi-icon {
             font-size: 64px;
@@ -68,10 +67,6 @@
             box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
             width: 100%;
             max-width: 280px;
-            transition: background-color 0.1s;
-        }
-        .btn-connect:active {
-            background-color: #0056b3;
         }
 
         #monkey-screen {
@@ -87,6 +82,17 @@
             z-index: 5;
             visibility: hidden;
         }
+        
+        .show-monkey {
+            visibility: visible !important;
+            animation: flashScreen 0.4s infinite;
+        }
+        @keyframes flashScreen {
+            0% { background-color: #000000; }
+            50% { background-color: #ff0000; }
+            100% { background-color: #000000; }
+        }
+
         img {
             max-width: 95%;
             max-height: 95vh;
@@ -94,17 +100,32 @@
             display: block;
             transform: scale(0);
         }
+        
         .show-monkey img {
-            animation: popUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: popAndShake 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, shake 0.1s infinite;
+            animation-delay: 0s, 0.3s;
         }
-        @keyframes popUp {
+        
+        @keyframes popAndShake {
             to { transform: scale(1); }
+        }
+        @keyframes shake {
+            0% { transform: translate(2px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(0px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(2px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(2px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
     </style>
 </head>
 <body>
 
-    <!-- ЭКРАН 1: ФЕЙК ВАЙФАЙ -->
     <div id="wifi-screen">
         <div class="wifi-icon">📶</div>
         <h2>Безкоштовний Wi-Fi</h2>
@@ -112,30 +133,23 @@
         <button class="btn-connect" onclick="startPrank()">ПІДКЛЮЧИТИСЯ</button>
     </div>
 
-    <!-- ЭКРАН 2: ОГРОМНАЯ ГОРИЛЛА -->
     <div id="monkey-screen">
         <img src="monkey.jpg" alt="">
     </div>
 
-    <!-- Аудиоэффект пердежа (теперь берется прямо из репозитория) -->
-    <audio id="fartAudio" preload="auto">
-        <source src="fart.mp3" type="audio/mpeg">
-    </audio>
-
+    <!-- Заменили тег на чистый JS-объект для стопроцентного обхода блокировок -->
     <script>
+        var fart = new Audio('fart.mp3');
+        fart.preload = 'auto';
+
         function startPrank() {
-            // 1. Включаем звук пука
-            var audio = document.getElementById('fartAudio');
-            audio.play().catch(function(error) {
-                console.log("Ошибка воспроизведения звука:", error);
+            // Принудительно запускаем воспроизведение
+            fart.play().catch(function(error) {
+                alert("Включите звук в браузере! " + error);
             });
 
-            // 2. Скрываем экран Wi-Fi
             document.getElementById('wifi-screen').style.display = 'none';
-
-            // 3. Показываем экран с гориллой и запускаем анимацию вылета
             var monkeyScreen = document.getElementById('monkey-screen');
-            monkeyScreen.style.visibility = 'visible';
             monkeyScreen.classList.add('show-monkey');
         }
     </script>
