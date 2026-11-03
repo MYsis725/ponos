@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Безкоштовний інтернет</title>
     
-    <!-- Пряме посилання на білу іконку Wi-Fi для вкладки -->
-    <link rel="icon" type="image/svg+xml" href="https://githubusercontent.com">
+    <!-- Твоя локальна іконка з файлів репозиторію -->
+    <link rel="icon" type="image/png" href="wifi.png">
     
     <style>
         body, html {
@@ -19,10 +19,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        /* Контейнер, який вирівнює текст і картинку по вертикалі */
+        /* Контейнер, який тримає текст і мавпу разом */
         .content-wrapper {
             display: flex;
             flex-direction: column;
@@ -31,11 +31,9 @@
             width: 100%;
             height: 100%;
             transform: scale(0);
-            /* Увесь контент з'являється плавно разом */
             animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* Стилі для твого напису */
         .promo-text {
             color: #ffffff;
             font-size: 26px;
@@ -48,7 +46,7 @@
 
         img {
             max-width: 95%; 
-            max-height: 75vh; /* Зменшено висоту, щоб текст точно поміщався зверху на смартфонах */
+            max-height: 75vh; /* Щоб на мобільних текст поміщався зверху */
             object-fit: contain;
             display: block;
         }
